@@ -1,12 +1,4 @@
 import streamlit as st
-import snowflake.connector
-import time
-import os
-import base64
-import re
-import pandas as pd
-import requests
-
 
 def init_connection():
     return snowflake.connector.connect(
