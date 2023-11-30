@@ -2,13 +2,9 @@
 import streamlit as st
 import utils as utl
 import streamlit.components.v1 as components
-from streamlit_elements import elements, mui, html
-from streamlit_elements import lazy
-from streamlit_elements import sync
 
 import time
 import streamlit.components.v1 as components
-from streamlit_option_menu import option_menu
 import smtplib
 from email.mime.text import MIMEText
 import os
@@ -20,7 +16,6 @@ from defnitions import*
 import pandas as pd 
 from PIL import Image
 import io
-import plotly.graph_objects as go
 from pathlib import Path
 import os
 import re
