@@ -348,7 +348,7 @@ if tab=="QR Gen":
         draw = ImageDraw.Draw(text_img)
         text = f"{data[-1]}"
        
-        text_width, text_height = draw.textsize(text )
+        text_width, text_height = draw.textsize(text)
         text_position = ((qr_width - text_width) // 2, (text_img.height - text_height) // 2)
 
         draw.text(text_position, text, fill="black" )
