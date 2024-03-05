@@ -15,6 +15,8 @@ import qrcode
 from defnitions import*
 import pandas as pd 
 from PIL import Image
+ 
+from io import BytesIO
 import io
 from pathlib import Path
 import os
@@ -322,7 +324,7 @@ if tab == "Home":
 
 
 if tab=="QR Gen":
-    
+
     
     def generate_qr_code(data, additional_text=None):
         
@@ -346,19 +348,24 @@ if tab=="QR Gen":
         # Draw the text "Kipi.bi" and additional text in a separate image
         text_img = Image.new('RGB', (qr_width, 50), color="#8fce00")  # Create a blank image for text
         draw = ImageDraw.Draw(text_img)
+        #font = ImageFont.truetype("framd.ttf", 20)  # Using a smaller font size for all text
+        font_url = "https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxP.ttf"
+        response = requests.get(font_url)
+        font_data = BytesIO(response.content)
+        font = ImageFont.truetype(font_data, 22)   
         text = f"{data[-1]}"
-       
-        text_width, text_height = draw.textsize(text)
+         
+        text_width, text_height = draw.textsize(text, font)
         text_position = ((qr_width - text_width) // 2, (text_img.height - text_height) // 2)
 
-        draw.text(text_position, text, fill="black" )
+        draw.text(text_position, text, fill="black", font=font)
 
         # Draw additional text if provided
         if additional_text:
-            additional_text_width, additional_text_height = draw.textsize(additional_text)
+            additional_text_width, additional_text_height = draw.textsize(additional_text, font)
             additional_text_position = ((qr_width - additional_text_width) // 2, text_img.height + 10)
 
-            draw.text(additional_text_position, additional_text, fill="black")
+            draw.text(additional_text_position, additional_text, fill="black", font=font)
 
         # Combine QR code image and text image
         combined_img = Image.new('RGB', (qr_width, qr_height + text_img.height), color="#8fce00")
