@@ -357,12 +357,21 @@ if tab=="QR Gen":
         font_data = BytesIO(response.content)
         font = ImageFont.truetype(font_data, 22)   
         text = f"{data[-1]}"
-         
-        # text_width, text_height = draw.textsize(text, font=font)
-        text_width, text_height = font.getsize(text)  
-        text_position = ((qr_width - text_width) // 2, (text_img.height - text_height) // 2)
 
+        text_img = Image.new('RGB', (qr_img.size[0], 50), color="#8fce00")
+        draw = ImageDraw.Draw(text_img)
+        font = ImageFont.load_default()  # You can change this to any font you like
+
+        # Draw text on the image
+        text_position = ((qr_img.size[0] - draw.textsize(text, font=font)[0]) // 2, (text_img.height - draw.textsize(text, font=font)[1]) // 2)
         draw.text(text_position, text, fill="black", font=font)
+
+     
+        # text_width, text_height = draw.textsize(text, font=font)
+        # text_width, text_height = font.getsize(text)  
+        # text_position = ((qr_width - text_width) // 2, (text_img.height - text_height) // 2)
+
+        # draw.text(text_position, text, fill="black", font=font)
 
         # Draw additional text if provided
         if additional_text:
