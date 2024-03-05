@@ -358,7 +358,7 @@ if tab=="QR Gen":
         font = ImageFont.truetype(font_data, 22)   
         text = f"{data[-1]}"
          
-        text_width, text_height = draw.textsize(text, font)
+        text_width, text_height = draw.textsize(text, font=font)
         text_position = ((qr_width - text_width) // 2, (text_img.height - text_height) // 2)
 
         draw.text(text_position, text, fill="black", font=font)
