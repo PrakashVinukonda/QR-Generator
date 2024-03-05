@@ -20,8 +20,7 @@ from pathlib import Path
 import os
 import re
 from defnitions import *
-
-
+from PIL import Image, ImageDraw, ImageFont
 #setting page configuration
 st.set_page_config(layout="wide", page_title='Kipi.bi Nexus',page_icon="🎉")
 
@@ -323,8 +322,8 @@ if tab == "Home":
 
 
 if tab=="QR Gen":
-
-    from PIL import Image, ImageDraw, ImageFont
+    
+    
     def generate_qr_code(data, additional_text=None):
         
         # Create QR code
@@ -342,23 +341,24 @@ if tab=="QR Gen":
 
         # Get the size of the QR code image
         qr_width, qr_height = qr_img.size
+        
         data = data.split('-')
         # Draw the text "Kipi.bi" and additional text in a separate image
         text_img = Image.new('RGB', (qr_width, 50), color="#8fce00")  # Create a blank image for text
         draw = ImageDraw.Draw(text_img)
-        font = ImageFont.truetype("framd.ttf", 20)  # Using a smaller font size for all text
-        text = f"{data[3]}"
-        text_width, text_height = draw.textsize(text, font)
+        text = f"{data[-1]}"
+       
+        text_width, text_height = draw.textsize(text )
         text_position = ((qr_width - text_width) // 2, (text_img.height - text_height) // 2)
 
-        draw.text(text_position, text, fill="black", font=font)
+        draw.text(text_position, text, fill="black" )
 
         # Draw additional text if provided
         if additional_text:
-            additional_text_width, additional_text_height = draw.textsize(additional_text, font)
+            additional_text_width, additional_text_height = draw.textsize(additional_text)
             additional_text_position = ((qr_width - additional_text_width) // 2, text_img.height + 10)
 
-            draw.text(additional_text_position, additional_text, fill="black", font=font)
+            draw.text(additional_text_position, additional_text, fill="black")
 
         # Combine QR code image and text image
         combined_img = Image.new('RGB', (qr_width, qr_height + text_img.height), color="#8fce00")
