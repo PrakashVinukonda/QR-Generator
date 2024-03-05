@@ -21,8 +21,11 @@ import io
 from pathlib import Path
 import os
 import re
-from defnitions import *
 from PIL import Image, ImageDraw, ImageFont
+import requests
+ 
+from defnitions import *
+
 #setting page configuration
 st.set_page_config(layout="wide", page_title='Kipi.bi Nexus',page_icon="🎉")
 
