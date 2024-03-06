@@ -355,23 +355,22 @@ if tab=="QR Gen":
         font_url = "https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxP.ttf"
         response = requests.get(font_url)
         font_data = BytesIO(response.content)
-        font = ImageFont.truetype(font_data, 22)   
+        font = ImageFont.truetype(font_data, 27)   
         text = f"{data[-1]}"
 
         text_img = Image.new('RGB', (qr_img.size[0], 50), color="#8fce00")
         draw = ImageDraw.Draw(text_img)
-        font = ImageFont.load_default()  # You can change this to any font you like
-
-        # Draw text on the image
-        text_position = ((qr_img.size[0] - draw.textsize(text, font=font)[0]) // 2, (text_img.height - draw.textsize(text, font=font)[1]) // 2)
-        draw.text(text_position, text, fill="black", font=font)
-
-     
-        # text_width, text_height = draw.textsize(text, font=font)
-        # text_width, text_height = font.getsize(text)  
-        # text_position = ((qr_width - text_width) // 2, (text_img.height - text_height) // 2)
-
-        # draw.text(text_position, text, fill="black", font=font)
+      
+        text_bbox = draw.textbbox((0, 0), text, font=font)
+        text_width = text_bbox[2] - text_bbox[0]
+        text_height = text_bbox[3] - text_bbox[1]
+        text_position = ((qr_width - text_width) // 2, (text_img.height - text_height) // 2)
+        vertical_padding = 18   
+        text_position = ((qr_width - text_width) // 2, (text_img.height - text_height) // 2 - vertical_padding)
+        draw.text(text_position, text, fill="#ffffff", font=font)
+        
+    
+    
 
         # Draw additional text if provided
         if additional_text:
