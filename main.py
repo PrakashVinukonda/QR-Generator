@@ -77,9 +77,9 @@ st.markdown(
     )
 
 
-SNOWFLAKE_ACCOUNT = 'zk09026.ap-southeast-1' #https://fpb65609.us-east-1.snowflakecomputing.com
-SNOWFLAKE_USER = 'Nexus4'
-SNOWFLAKE_PASSWORD = 'Nexus$$4'
+SNOWFLAKE_ACCOUNT = 'ix42735.ap-southeast-1' #https://fpb65609.us-east-1.snowflakecomputing.com
+SNOWFLAKE_USER = 'NEXUSHYD'
+SNOWFLAKE_PASSWORD = 'Nexus$$Hyd123'
 SNOWFLAKE_DATABASE = 'NEXUS'
 SNOWFLAKE_SCHEMA = 'PUBLIC'
  
